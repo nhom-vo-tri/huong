@@ -1,0 +1,15 @@
+TEST_CASE("2. Test Discount Boundaries", "[boundary]") {
+    CartService cartService;
+
+    // TC5: Đơn giá bằng 0, có giảm giá nhẹ
+    REQUIRE(cartService.calculateTotal(0.0, 10, 5) == 0.0);
+    
+    // TC13: Giảm giá có số thập phân (12.5%)
+    REQUIRE(cartService.calculateTotal(100.0, 1, 12.5) == 87.5);
+    
+    // TC14: Biên giảm giá siêu nhỏ (0.01%) - Dùng Approx để tránh sai số số thực trong C++
+    REQUIRE(cartService.calculateTotal(100.0, 1, 0.01) == Approx(99.99));
+    
+    // TC15: Biên giảm giá siêu lớn (99.9%)
+    REQUIRE(cartService.calculateTotal(100.0, 1, 99.9) == Approx(0.1));
+}
