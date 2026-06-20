@@ -1,0 +1,18 @@
+TEST_CASE("3. Test Large Data and Decimals", "[large_data]") {
+    CartService cartService;
+
+    // TC11: Số lượng mua cực lớn (10,000 sản phẩm)
+    REQUIRE(cartService.calculateTotal(10.0, 10000, 0) == 100000.0);
+    
+    // TC12: Đơn giá có số thập phân lẻ (10.5)
+    REQUIRE(cartService.calculateTotal(10.5, 2, 0) == 21.0);
+    
+    // TC16: Tổng giá trị hóa đơn lớn
+    REQUIRE(cartService.calculateTotal(500000.0, 3, 20) == 1200000.0);
+    
+    // TC17: Đơn giá siêu nhỏ (0.1)
+    REQUIRE(cartService.calculateTotal(0.1, 10, 0) == Approx(1.0));
+    
+    // TC18: Phối hợp số lượng lớn và có giảm giá sâu
+    REQUIRE(cartService.calculateTotal(20.0, 500, 50) == 5000.0);
+}
