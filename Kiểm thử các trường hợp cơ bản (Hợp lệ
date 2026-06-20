@@ -1,0 +1,9 @@
+#define CATCH_CONFIG_MAIN
+#include "catch.hpp" 
+TEST_CASE("1. Test Basic Calculations", "[valid]") {
+    CartService cartService;
+    REQUIRE(cartService.calculateTotal(100.0, 2, 0) == 200.0);
+    REQUIRE(cartService.calculateTotal(100.0, 5, 10) == 450.0);
+    REQUIRE(cartService.calculateTotal(50.0, 2, 100) == 0.0);
+    REQUIRE(cartService.calculateTotal(150.0, 1, 0) == 150.0);
+}
